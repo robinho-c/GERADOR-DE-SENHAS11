@@ -21,7 +21,7 @@ function diminuiTamanho(){
     }
 
     numeroSenha-textcontent = tamanhoSenha;
-    geralSenha();
+    geraSenha();
 
 }
 
@@ -37,62 +37,26 @@ function aumentaTamanho(){
     geralSenha()
 
 }
-
-
-
-
-
-
-
-
-
-
-
+for (i=0;i<checkebox.length;i++){
+    checkbox[i].onclick=geraSenha;
+}
 
 geralSenha();
 
 function geralSenha(){
-    let senha = ";
-    for(let i = 0; i < tamanhoSenha; i++)
-    let numeroAleatorio = math.random()*letraMaiusculas.longht;
-    numeroAleatorio = math.floor(numeroAleatorio);
-    senha = + letraMaiusculas(numeroAleatorio);
-
+    let alfabeto = ";
+if(checkebox[0].checked){
+    alfabeto=alfabeto+letrasMaiusculas;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-campoSenha.value = senha
-
-geralSenha();
-
-function geraSenha(){
-    let alfabeto = "";
-    if(checkbox[0].checked) {
-        alfabeto=alfabeto+letraMaiusculas;
-    }
-
-    if(checkbox[0].checked) {
-        alfabeto=alfabeto+letraMinusculas;
-    }
-
-    if(checkbox[0].checked) {
-        alfabeto=alfabeto+ numeros;
-    }
-
-
-    if(checkbox[0].checked) {
-        alfabeto=alfabeto+simbolos;
-    }
+if(checkebox[1].checked){
+    alfabeto=alfabeto+letrasMinusculas;
+}
+if(checkebox[2].checked){
+    alfabeto=alfabeto+numeros;   
+}
+if(checkebox[3].checked){
+    alfabeto=alfabeto+simbolos;
+}
 
     let senha = ";
     for(let i = 0; i < tamanhoSenha; i++)
@@ -101,6 +65,19 @@ function geraSenha(){
     senha = + letraMaiusculas(numeroAleatorio);
 
     campoSenha.value = senha
-    classificasenha ();
-
+    classificasenha (alfabeto.length);
 }
+function classificaSenha(tamanhoAlfabeto){
+    let entropia=tamanhoSenha * Math.log2(tamanhoAlfabeto);
+    console.log(entropia);
+    forcaSenha.classList.remove('fraca', 'media', 'forte',);
+    if (entropia>57){
+        forcaSenha.classList.add('forte');
+    } else if( entropia>35&& entropia<57){
+        forcaSenha.classList.add('media');
+    } else if (entropia <=35){
+        forcaSenha.classList.add('fraca');
+        }
+        const valorEntopia=document.querySelector('.entropia');
+        valorEntropia.textContent=2**Math.floor(entropia)/(100e6*60*60*24);
+}2
